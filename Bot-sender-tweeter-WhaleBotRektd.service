@@ -1,0 +1,15 @@
+[Unit]
+Description=Bot-sender-tweeter-WhaleBotRektd
+After=network.target
+
+[Service]
+EnvironmentFile=
+ExecStart=/bot-tweet/Twitter-bot/venv/bin/python Bot-sender-tweeter-WhaleBotRektd.py
+ExecReload=/bot-tweet/Twitter-bot/venv/bin/python Bot-sender-tweeter-WhaleBotRektd.py
+WorkingDirectory=/bot-tweet/Twitter-bot
+KillMode=process
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
