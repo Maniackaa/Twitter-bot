@@ -101,13 +101,18 @@ async def report():
         short_values = [x for x in short]
         short_sum = sum(short_values)
 
+        way = long_sum - short_sum
+        way_word = 'Рынок вверх' if way > 0 else 'Рынок вниз'
         report_message = (
-            f'Отчет за период {sart_period} - {str(datetime.datetime.now())[:-7]}\n\n'
-            f'Сумма Long: {long_sum}\n'
-            f'{long_values}\n\n'
-            f'Сумма Short: {short_sum}\n'
-            f'{short_values}\n'
-            f'Long - Short: {long_sum - short_sum}'
+            f'Отчет за период\n'
+            f'с  {sart_period}\n'
+            f'по {str(datetime.datetime.now())[:-7]}\n'
+            f'BTCUSDT|BTCUSD|XBTUSDT|XBTUSD|XBTUSDT\n\n'
+            f'Сумма Long: {long_sum:,.0f}\n'
+            # f'{long_values}\n\n'
+            f'Сумма Short: {short_sum:,.0f}\n'
+            # f'{short_values}\n\n'
+            f'{way_word}\n{way:,.0f}'
         )
         return report_message
 
@@ -150,7 +155,9 @@ async def main():
     # print(x)
     # y = await add_new_tweets([('2023-05-21T15:44:34.000Z', 'Binance Liquidated Long on ETHUSDT @ $1,798: Sell $77,566'), ('2023-05-21T15:44:19.000Z', 'Binance Liquidated Long on DOGEUSDT @ $0.07: Sell $125,512'), ('2023-05-21T15:44:18.000Z', 'Binance Liquidated Long on LDOUSDT @ $2.02: Sell $136,211'), ('2023-05-21T15:44:16.000Z', 'Binance Liquidated Long on ARBUSDT @ $1.13: Sell $51,028'), ('2023-05-21T14:25:47.000Z', 'Binance Liquidated Short on CFXUSDT @ 0.31: Buy $94,865'), ('2023-05-21T14:19:44.000Z', 'Binance Liquidated Short on SUSHIUSDT @ 0.93: Buy $134,087'), ('2023-05-21T14:19:43.000Z', 'Binance Liquidated Long on XMRUSDT @ $147: Sell $275,355'), ('2023-05-21T14:00:21.000Z', 'Binance Liquidated Short on ETHUSDT @ $1,819: Buy $73,504'), ('2023-05-21T11:16:02.000Z', 'Binance Liquidated Long on ETHUSDT @ $1,797: Sell $80,868'), ('2023-05-21T10:45:28.000Z', 'Bybit liquidated Long on BTCUSD @ $26,774: Sell $62,352'), ('2023-05-21T10:45:27.000Z', 'Bitmex Liquidated Long on XBTUSD @ $26,947: Sell $202,000'), ('2023-05-21T06:17:21.000Z', 'Binance Liquidated Long on BTCUSDT @ $26,941: Sell $167,951'), ('2023-05-21T00:50:22.000Z', 'Binance Liquidated Short on MASKUSDT @ 4.70: Buy $77,649'), ('2023-05-20T23:38:18.000Z', 'Binance Liquidated Short on BTCUSDT @ $27,180: Buy $50,364'), ('2023-05-20T17:59:18.000Z', 'Binance Liquidated Short on BNBUSDT @ $314: Buy $50,925'), ('2023-05-20T17:59:06.000Z', 'Binance Liquidated Short on ETHUSDT @ $1,835: Buy $54,516'), ('2023-05-20T17:56:11.000Z', 'Binance Liquidated Short on ETHUSDT @ $1,834: Buy $100,797'), ('2023-05-20T17:47:45.000Z', 'Binance Liquidated Short on XRPUSDT @ 0.48: Buy $97,136'), ('2023-05-20T17:46:24.000Z', 'Binance Liquidated Short on BTCUSDT @ $27,135: Buy $50,497'), ('2023-05-20T17:46:23.000Z', 'Binance Liquidated Short on ETHUSDT @ $1,831: Buy $78,255'), ('2023-05-20T17:44:56.000Z', 'Bitmex Liquidated Short on XBTUSD @ $27,040: Buy $53,100'), ('2023-05-20T17:44:56.000Z', 'Binance Liquidated Short on MASKUSDT @ 4.71: Buy $94,292'), ('2023-05-20T17:35:47.000Z', 'Binance Liquidated Short on XRPUSDT @ 0.47: Buy $78,643'), ('2023-05-20T15:01:31.000Z', 'Binance Liquidated Short on BTCUSDT @ $27,033: Buy $50,336'), ('2023-05-20T09:24:38.000Z', 'Binance Liquidated Short on 1000PEPEUSDT @ 0.00: Buy $50,502')])
     # print(y)
-    # await report()
+    x = await report()
+    print(x)
+
     # break
 
 if __name__ == '__main__':
