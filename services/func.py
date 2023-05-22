@@ -31,7 +31,7 @@ def get_browser():
     options = Options()
     options.page_load_strategy = 'eager'
     options.add_argument("--no-sandbox")
-    options.add_argument("window-size=1200,2500")
+    options.add_argument("window-size=1200,1000")
     options.add_argument('--headless')
     # user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'
     user_agent = 'Mozilla/5.0 (Linux; arm_64; Android 13; SM-G965F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.5615.48 YaBrowser/21.3.4.59 Mobile Safari/537.36'

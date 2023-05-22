@@ -1,9 +1,11 @@
 import asyncio
 import logging.config
+import sys
 import time
 
 
 from config_data.config import LOGGING_CONFIG
+from database.db import init_models
 from database.db_func import add_new_tweets
 from services.func import get_tweet
 
@@ -13,6 +15,7 @@ logger = logging.getLogger('my_logger')
 
 async def main():
     logger.info('Запуск скрипта')
+
     url = 'https://twitter.com/WhaleBotRektd/with_replies'
     while True:
         try:
@@ -25,6 +28,12 @@ async def main():
             logger.critical('Ошибка', exc_info=True)
             time.sleep(60)
 
+
 if __name__ == '__main__':
+    if sys.version_info[:2] == (3, 7):
+        asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(init_models())
+    loop.close()
     asyncio.run(main())
 
