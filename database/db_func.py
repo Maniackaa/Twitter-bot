@@ -48,8 +48,7 @@ async def add_new_tweets(data: list):
             new_tweet = Tweet()
             new_tweet.date = tweet_date
             new_tweet.text = tweet_text
-            # volume = response_tweet(new_tweet.text)
-            volume = 1
+            volume = response_tweet(new_tweet.text)
             if volume:
                 new_tweet.volume = volume
             try:
