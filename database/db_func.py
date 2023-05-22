@@ -22,7 +22,7 @@ logger = logging.getLogger('my_logger')
 def response_tweet(tweet_text: str):
     """Читает твит и возвращает объем если BTCUSDT|BTCUSD|XBTUSDT|XBTUSD|XBTUSDT"""
     logger.debug(f'Распознаем {tweet_text}')
-    pattern = '([Ss]hort|[Ll]ong).+(BTCUSDT|BTCUSD|XBTUSDT|XBTUSD|XBTUSDT) @ \$(.+):.+\$(\S+)$'
+    pattern = '([Ss]hort|[Ll]ong).+(BTCUSDT|BTCUSD|XBTUSD|XBTUSDT) @ \$(.+):.+\$(\S+)$'
     search = re.findall(pattern, tweet_text)
     if search:
         operation = search[0][0]
@@ -104,13 +104,13 @@ async def report():
         way = long_sum - short_sum
         way_word = 'Рынок вверх' if way > 0 else 'Рынок вниз'
         report_message = (
-            f'Отчет за период\n'
+            # f'Отчет за период\n'
             f'с  {sart_period}\n'
-            f'по {str(datetime.datetime.now())[:-7]}\n'
-            f'BTCUSDT|BTCUSD|XBTUSDT|XBTUSD|XBTUSDT\n\n'
+            f'по {str(datetime.datetime.now())[:-7]}\n\n'
+            # f'BTCUSDT|BTCUSD|XBTUSD|XBTUSDT\n\n'
             f'Сумма Long: {long_sum:,.0f}\n'
             # f'{long_values}\n\n'
-            f'Сумма Short: {short_sum:,.0f}\n'
+            f'Сумма Short: {short_sum:,.0f}\n\n'
             # f'{short_values}\n\n'
             f'{way_word}\n{way:,.0f}'
         )
