@@ -102,7 +102,7 @@ async def report():
         short_sum = sum(short_values)
 
         way = long_sum - short_sum
-        way_word = 'Рынок вверх' if way > 0 else 'Рынок вниз'
+        way_word = 'Рынок вверх' if way < 0 else 'Рынок вниз'
         report_message = (
             # f'Отчет за период\n'
             f'с  {sart_period}\n'
