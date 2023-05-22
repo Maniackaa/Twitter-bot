@@ -12,11 +12,13 @@ router: Router = Router()
 @router.message(Command(commands=["start"]))
 async def process_start_command(message: Message, state: FSMContext):
     await state.clear()
-    text = 'Привет!'
+    text = (f'Привет!\n'
+            f'Команды:'
+            f'/report - Получить отчет')
     await message.answer(text)
 
 
-@router.message(Command(commands=["отчет"]))
+@router.message(Command(commands=["report"]))
 async def process_start_command(message: Message):
 
     text = await report()
