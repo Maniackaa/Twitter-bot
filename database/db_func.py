@@ -117,6 +117,21 @@ async def report():
         return report_message
 
 
+async def get_last_value():
+    async_session = async_sessionmaker(engine)
+    async with async_session() as session:
+        query = select(Tweet).order_by(Tweet.date.desc()).limit(1)
+        last = await session.execute(query)
+        last = last.scalars().one()
+        report_message = (
+            f'Последняя запись:\n'
+            f'{last.date}\n'
+            f'{last.text}\n'
+            f'{last.volume or "-"}'
+        )
+        return report_message
+
+
 async def get_last_volume(period, operation):
     """
     Раcчет объема последних операций за период в секундах.
@@ -157,6 +172,8 @@ async def main():
     # print(y)
     x = await report()
     print(x)
+    y = await get_last_value()
+    print(y)
 
     # break
 

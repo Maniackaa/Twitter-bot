@@ -20,7 +20,7 @@ async def main():
     while True:
         try:
             scanned_tweets = get_tweet(url)
-            print(scanned_tweets)
+            logger.info(f'Твиты: {scanned_tweets}')
             if scanned_tweets:
                 await add_new_tweets(scanned_tweets)
             time.sleep(1)
