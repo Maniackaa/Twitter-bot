@@ -62,12 +62,12 @@ LOGGING_CONFIG = {
     'loggers': {
         'my_logger': {
             'handlers': ['rotating_file_handler'],
-            'level': 'info',
+            'level': 'INFO',
             'propagate': True
         },
         'bot_logger': {
             'handlers': ['rotating_file_handler_bot'],
-            'level': 'info',
+            'level': 'INFO',
             'propagate': True
         },
     }
