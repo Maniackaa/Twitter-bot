@@ -145,7 +145,7 @@ async def get_last_volume(period, operation):
         logger.debug(f'Результат get_last_volume: {volumes}')
         return sum(volumes)
     except Exception as error:
-        logger.error(f'Ошибка в функции get_last_volume')
+        logger.error(f'Ошибка в функции get_last_volume', exc_info=True)
 
 
 

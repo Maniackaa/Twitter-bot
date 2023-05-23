@@ -1,5 +1,6 @@
 import datetime
 import logging
+import requests
 
 from seleniumwire import webdriver
 from selenium.common import TimeoutException
@@ -12,6 +13,16 @@ import re
 from config_data.config import config
 
 logger = logging.getLogger('my_logger')
+
+
+def send_message_tg(message: str, chat_id: str):
+    """Отправка сообщения через чат-бот телеграмма"""
+    url = (f'https://api.telegram.org/'
+           f'bot{config.tg_bot.token}/'
+           f'sendMessage?'
+           f'chat_id={chat_id}&'
+           f'text={message}')
+    requests.get(url)
 
 
 def find_weth(text):
