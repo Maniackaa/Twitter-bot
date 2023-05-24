@@ -5,25 +5,6 @@ from environs import Env
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-#
-# def get_logger():
-#     logger = logging.getLogger(__file__)
-#     logger.setLevel(logging.DEBUG)
-#     format_log = logging.Formatter(u'%(filename)s:%(lineno)d #%(levelname)-8s '
-#                u'[%(asctime)s]: %(message)s')
-#     logger_path = BASE_DIR / 'logs' / f'{__name__}.log'
-#     file_handler = logging.FileHandler(logger_path, mode='w', encoding='UTF-8')
-#     file_handler.setFormatter(format_log)
-#     file_handler.setLevel(logging.DEBUG)
-#
-#     std_handler = logging.StreamHandler()
-#     std_handler.setFormatter(format_log)
-#     std_handler.setLevel(logging.DEBUG)
-#
-#     logger.addHandler(file_handler)
-#     logger.addHandler(std_handler)
-#     return logger
-
 
 LOGGING_CONFIG = {
     'version': 1,

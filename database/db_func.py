@@ -17,7 +17,7 @@ from services.func import find_start_period
 logging.config.dictConfig(LOGGING_CONFIG)
 
 logger = logging.getLogger('my_logger')
-
+bot_log = logging.getLogger('bot_logger')
 
 def response_tweet(tweet_text: str):
     """Читает твит и возвращает объем если BTCUSDT|BTCUSD|XBTUSDT|XBTUSD|XBTUSDT"""
@@ -166,14 +166,19 @@ async def get_last_volume(period, operation):
 
 
 async def set_botsettings_value(name, value):
-    async_session = async_sessionmaker(engine)
-    async with async_session() as session:
-        query = select(BotSettings).where(BotSettings.name == name).limit(1)
-        result = await session.execute(query)
-        setting: BotSettings = result.scalar()
-        if setting:
-            setting.value = value
-        await session.commit()
+    try:
+        async_session = async_sessionmaker(engine)
+        async with async_session() as session:
+            query = select(BotSettings).where(BotSettings.name == name).limit(1)
+            result = await session.execute(query)
+            setting: BotSettings = result.scalar()
+            if setting:
+                setting.value = value
+            await session.commit()
+    except Exception as err:
+        bot_log.error(f'Ошибка set_botsettings_value. name: {name}, value: {value}')
+        raise err
+
 
 
 async def main():
