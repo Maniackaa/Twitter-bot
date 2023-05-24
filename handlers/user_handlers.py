@@ -15,9 +15,10 @@ async def process_start_command(message: Message, state: FSMContext):
     text = (f'Привет!\n'
             f'Команды:\n'
             f'/report - Получить отчет\n'
-            f'/last - Последний твит из базы'
+            f'/last - Последний твит из базы\n'
             f'Настройки:\n'
-            f'set:limit:50 - изменить порог счетчика'
+            f'set:limit:50 - изменить порог счетчика.\n'
+            f'set:period:50 - изменить период отчета, мин.\n'
             )
     await message.answer(text)
 
@@ -43,6 +44,10 @@ async def process_start_command(message: Message):
         value = command[2]
         if name == 'limit':
             settings_name = 'Etherscanio-parser_lower_limit_count'
+            await set_botsettings_value(settings_name, value)
+            await message.answer(f'{name}, {value}')
+        elif name == 'period':
+            settings_name = 'Etherscanio-parser_report_time'
             await set_botsettings_value(settings_name, value)
             await message.answer(f'{name}, {value}')
         else:
