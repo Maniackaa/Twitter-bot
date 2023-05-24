@@ -165,22 +165,6 @@ async def get_last_volume(period, operation):
         logger.error(f'Ошибка в функции get_last_volume', exc_info=True)
 
 
-async def set_botsettings_value(name, value):
-    try:
-        async_session = async_sessionmaker(engine)
-        async with async_session() as session:
-            query = select(BotSettings).where(BotSettings.name == name).limit(1)
-            result = await session.execute(query)
-            setting: BotSettings = result.scalar()
-            if setting:
-                setting.value = value
-            await session.commit()
-    except Exception as err:
-        bot_log.error(f'Ошибка set_botsettings_value. name: {name}, value: {value}')
-        raise err
-
-
-
 async def main():
     pass
     # x = await get_last_volume(120000, 'Long')
