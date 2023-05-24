@@ -57,7 +57,10 @@ def get_tweet(page_url):
     """Читает первые твиты со ссылки"""
     logger.debug(f'Читаем твиты с {page_url}')
     with get_browser() as browser:
-        browser.get(page_url)
+        try:
+            browser.get(page_url)
+        except Exception as err:
+            raise err
         xpatch = '//article[@data-testid="tweet"]'
         logger.debug('Ждем')
         try:

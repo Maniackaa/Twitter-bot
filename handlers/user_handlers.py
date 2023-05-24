@@ -4,7 +4,7 @@ from aiogram.types import CallbackQuery, Message, URLInputFile
 
 from aiogram.fsm.context import FSMContext
 
-from database.db_func import report, get_last_value
+from database.db_func import report, get_last_value, set_botsettings_value
 
 router: Router = Router()
 
@@ -15,7 +15,10 @@ async def process_start_command(message: Message, state: FSMContext):
     text = (f'Привет!\n'
             f'Команды:\n'
             f'/report - Получить отчет\n'
-            f'/last - Последний твит из базы')
+            f'/last - Последний твит из базы'
+            f'Настройки:\n'
+            f'set:limit:50 - изменить порог счетчика'
+            )
     await message.answer(text)
 
 
@@ -29,3 +32,23 @@ async def process_start_command(message: Message):
 async def process_start_command(message: Message):
     text = await get_last_value()
     await message.answer(text)
+
+
+@router.message(Text(startswith='set:'))
+async def process_start_command(message: Message):
+    # set:limit:100
+    try:
+        command = message.text.split(':')
+        name = command[1]
+        value = command[2]
+        if name == 'limit':
+            settings_name = 'Etherscanio-parser_lower_limit_count'
+            await set_botsettings_value(settings_name, value)
+            await message.answer(f'{name}, {value}')
+        else:
+            await message.answer(f'Неизвестная команда')
+    except IndexError:
+        await message.answer(f'Неверный формат команды')
+
+
+

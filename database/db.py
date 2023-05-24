@@ -35,6 +35,18 @@ class Tweet(Base):
     def __repr__(self):
         return f'{self.id}. {self.date} {self.text}'
 
+
+class BotSettings(Base):
+    __tablename__ = 'bot_settings'
+    id: Mapped[int] = mapped_column(primary_key=True,
+                                    autoincrement=True,
+                                    comment='Первичный ключ')
+    name: Mapped[str] = mapped_column(String(50))
+    value: Mapped[str] = mapped_column(String(50), nullable=True, default='')
+    description: Mapped[str] = mapped_column(String(255),
+                                             nullable=True,
+                                             default='')
+
 # Base.metadata.create_all(engine)
 
 
